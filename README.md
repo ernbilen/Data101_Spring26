@@ -7,7 +7,7 @@
 | Office Hours | [Calendly](https://calendly.com/bilene/office-meeting) <br> M 11:30a-1p, W 11:30a-1p |
 | GitHub | [ernbilen](https://github.com/ernbilen) |
 
-* **Meeting day/time**: M-Th 1:30-2:45pm, Althouse 201
+* **Meeting day/time**: T-Th 10:30-11:45a, Althouse 204
 * Office hours also available by appointment.
 * **QRA:** Phuong Hoang [hoangm@dickinson.edu](mailto:hoangm@dickinson.edu)	   
 * **QRA Office Hours:** <br>TBA

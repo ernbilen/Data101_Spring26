@@ -10,7 +10,7 @@
 * **Meeting day/time**: T-Th 10:30-11:45a, Althouse 204
 * Office hours also available by appointment.
 * **QRA:** Phuong Hoang [hoangm@dickinson.edu](mailto:hoangm@dickinson.edu)	   
-* **QRA Office Hours:** <br>M 4:30-50:30p, F 4:30-5:30p @Althouse 109
+* **QRA Office Hours:** <br>M 4:30-5:30p, F 4:30-5:30p @Althouse 109
 
 ## Course description ##
 

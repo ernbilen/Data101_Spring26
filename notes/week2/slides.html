@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Week 2: Statistics primer</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Eren Bilen, Assistant Professor of Data Analytics" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Week 2: Statistics primer
+]
+.author[
+### Eren Bilen, Assistant Professor of Data Analytics
+]
+.institute[
+### Dickinson College
+]
+
+---
+
+
+
+&lt;style&gt;
+.caption {
+  text-align: center;
+  font-size: 14px;
+}
+&lt;/style&gt;
+
+
+&lt;style&gt;
+.word-under { text-decoration: none; }
+.def { display: none; }
+/* step 2: underline the word */
+.remark-slide-content.step2 .word-under { text-decoration: underline; }
+/* step 3: keep underline and reveal the definition */
+.remark-slide-content.step3 .word-under { text-decoration: underline; }
+.remark-slide-content.step3 .def { display: block; }
+&lt;/style&gt;
+
+
+&lt;!--
+.caption:before {
+  content:"Figure: ";
+  font-weight: bold;
+} --&gt;
+
+
+
+
+
+&lt;br&gt;&lt;br&gt;
+**Where do data come from?**
+
+&lt;img src="baby.jpg" style="position:fixed; top:20px; left:420px; width:200px; z-index:9999;"&gt;
+
+--
+
+`$$\\[1cm]$$`
+&amp;rarr;&amp;nbsp; from **a unit** or **object** is an item we observe. When the unit is a person, we call the unit as a **subject**. (cars, plants, Dickinson students..)
+
+--
+
+&amp;rarr;&amp;nbsp; the information we record is called an **observation**. (Like, age)
+
+--
+
+&amp;rarr;&amp;nbsp; if we record all observations and store it together, we have a **variable**. (Like, age can vary from person to person)
+
+--
+
+&amp;rarr;&amp;nbsp; if we put bunch of variables together, we have a **dataset**. Data sets look like tables or spreadsheets.
+
+--
+
+&amp;rarr;&amp;nbsp; if we put bunch of data sets together, we have a **database**. (we won't work with databases in this class, but know that most companies and organizations work databases because of how much data they have)
+
+
+---
+
+&lt;br&gt;&lt;br&gt;
+**Where do data come from?**
+
+&lt;img src="baby.jpg" style="position:fixed; top:20px; left:420px; width:200px; z-index:9999;"&gt;
+
+--
+
+`$$\\[1cm]$$`
+
+How to go about collecting data? If you collect it from the entire population, ie, every object or member of the group: **census**. (super costly)
+
+--
+
+&amp;rarr;&amp;nbsp; Luckily we don't need to, due to the Central Limit Theorem (CLT).
+
+--
+
+CLT says: if you collect data from a random subset from the population, the implications you can derive from your sample will be roughly the same as if you access to the entire population! (getting a sample is easier, but not a walk in the park either, eg: political polls)
+
+--
+
+&lt;img src="dewey.png" width="48%" style="display: block; margin: auto 0 auto auto;" /&gt;
+
+---
+&lt;br&gt;&lt;br&gt;
+**Variable Types**
+
+→ **Categorical (qualitative)** variables are those which classify the units into categories. The categories may or may not have a natural ordering to them.
+
+Example: Education level (high-school, college,…)
+
+→ A **numeric (quantitative)** variable is one that measures a numerical characteristic.
+
+Example: Years of education, income
+
+--
+
+What do you think?: eye color
+--
+, number of words in a book
+--
+, hometown
+--
+, zipcode
+
+--
+
+Precision of recording:&lt;br&gt;
+A **discrete variable** can only consist of integer values, 
+	e.g., N = {1, 2, 3, …}
+	
+A **continuous variable** can take on any value within a given interval. e.g., 1.5088039, 5, 693.84975 …
+
+--
+
+What do you think? Number of elevators in a building
+--
+, IMDB score
+--
+, duration of a speech
+
+---
+
+
+&lt;br&gt;&lt;br&gt;
+**Activity:**
+
+→ Suppose you are studying Shakespeare plays. You want to collect data to answer some research questions.
+
+Come up with **three variables** you could record.
+
+-How you would measure it (be specific).&lt;br&gt;
+-Identify whether it is numerical, categorical.&lt;br&gt;
+-If numerical, is it discrete or continuous?&lt;br&gt;
+-Note any possible measurement issues.
+
+&lt;img src="shakespeare.png" width="48%" style="margin-top:-150px;margin-left:400px;" /&gt;
+
+
+---
+
+&lt;br&gt;&lt;br&gt;
+**Activity:**
+
+→ Let's repeat the previous activity, but this time with Johann Sebastian Bach's works.
+
+Come up with **three variables** you could record.
+
+-How you would measure it (be specific).&lt;br&gt;
+-Identify whether it is numerical, categorical.&lt;br&gt;
+-If numerical, is it discrete or continuous?&lt;br&gt;
+-Note any possible measurement issues.
+
+&lt;img src="bach.png" width="48%" style="margin-top:-150px;margin-left:400px;" /&gt;
+
+---
+
+&lt;br&gt;&lt;br&gt;
+
+**Dataframes**
+
+In python and R, datasets are often representated as **dataframes**. Dataframes are objects in your programming session that hold your dataset in a table-like form.
+
+Examples:
+
+[Titanic data](https://www.kaggle.com/datasets/aliaamiri/titanic-passengers-and-crew-complete-list?utm_source=chatgpt.com) ([dashboard](https://reporttitanic.streamlit.app))
+
+[Enrollment dashboard at Dickinson](https://enrollment.streamlit.app)
+
+---
+
+&lt;br&gt;&lt;br&gt;
+
+**Statistical summaries from data**
+
+Measures of Central Tendency &lt;br&gt;
+-Mean: Arithmetic average, `\(\bar{x} = \frac{\sum_{i=1}^{n} x_i}{n}\)` Sensitive to extremes ⚠️&lt;br&gt;
+-Median: Middle value when sorted. Robust against outliers.&lt;br&gt;
+-Mode: Most frequent value. Useful for categorical data.&lt;br&gt;
+
+&lt;img src="titanicage.png" width="60%" style="margin-top:10px;margin-left:-20px;" /&gt;
+
+&lt;img src="meanmedian.png" width="45%" style="position:relative; top:-400px; left:450px; z-index:10;" /&gt;
+
+
+---
+
+&lt;br&gt;&lt;br&gt;
+
+**Activity**
+
+Suppose we want to know about class sizes at Dickinson. We sampled 7 classes:
+
+| Course    | Enrollment | Subject       |
+|-----------|------------|---------------|
+| DATA 101  | 11         | Data Analytics|
+| MATH 225  | 24         | Math          |
+| HIST 206  | 7          | History       |
+| INBM 236  | 25         | Business      |
+| ECON 101  | 24         | Economics     |
+| ECON 214  | 18         | Economics     |
+| ECON 351  | 24         | Economics     |
+
+&lt;br&gt;
+-Find mean and median of `Enrollment`.&lt;br&gt;
+-Find the mode of `Subject`.
+
+
+---
+
+&lt;br&gt;&lt;br&gt;
+
+**Statistical summaries from data**
+
+Measures of Spread (Variability) &lt;br&gt;
+-Range = Max - Min. Very sensitive to extremes. ⚠️&lt;br&gt;
+-Variance: Average squared deviation from the mean.&lt;br&gt;
+-Standard Deviation (SD): Square root of variance; to get back the original units.
+
+&lt;div style="display:flex; align-items:center; gap:24px;"&gt;
+
+  &lt;!-- make the image column take ~70% of the slide --&gt;
+  &lt;div style="flex:0 0 70%;"&gt;
+    &lt;img src="titanicage.png" style="width:450px; max-width:none; display:block;"&gt;
+  &lt;/div&gt;
+
+&lt;div style="flex:0 0 30%; font-size:110%; margin-top:-100px;"&gt;
+  
+sample variance:
+$$
+s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}
+$$
+
+sample std dev:
+$$
+s = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}}
+$$
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+
+---
+
+&lt;br&gt;&lt;br&gt;
+
+**Activity**
+
+Suppose we want to know about class sizes at Dickinson. We sampled 7 classes:
+
+| Course    | Enrollment | Subject       |
+|-----------|------------|---------------|
+| DATA 101  | 11         | Data Analytics|
+| MATH 225  | 24         | Math          |
+| HIST 206  | 7          | History       |
+| INBM 236  | 25         | Business      |
+| ECON 101  | 24         | Economics     |
+| ECON 214  | 18         | Economics     |
+| ECON 351  | 24         | Economics     |
+
+&lt;br&gt;
+-Find the standard deviation of `Enrollment`.&lt;br&gt;
+
+---
+
+&lt;br&gt;&lt;br&gt;
+
+**Fun one:** 
+
+
+| Library                         | Floors | Type       |
+|---------------------------------|--------|------------|
+| Bodleian Library (Oxford)       | 2      | Academic   |
+| British Library (London)        | 2      | National   |
+| Library of Alexandria (Egypt)   | 2      | Public     |
+| Vatican Library (Rome)          | 2      | Religious  |
+| Beinecke Library (Yale)         | 2      | Academic   |
+| Trinity College Library (Dublin)| 2      | Academic   |
+| Library of Congress (D.C.)      | 2      | National   |
+
+&lt;br&gt;
+-Find the mean and standard deviation of `Floors`.&lt;br&gt;
+
+---
+
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+&lt;img src="thinking.png" width="55%" style="display: block; margin: auto;" /&gt;
+
+&lt;div style="text-align: center;"&gt;
+Questions..?
+
+&lt;br&gt;&lt;br&gt;
+
+
+
+&lt;/div&gt;
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(https://pbs.twimg.com/profile_images/1121082444596350976/IH7Sq90N_400x400.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 110px;
+  height: 128px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

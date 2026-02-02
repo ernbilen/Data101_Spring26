@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+  <title>Favorite Movies by Genre</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body {
+      font-family: "DejaVu Sans", sans-serif;
+      background: #fff;
+    }
+    .bar {
+      fill: steelblue;
+    }
+    .bar:hover {
+      fill: darkgreen;
+    }
+    .axis text {
+      font-size: 12px;
+    }
+    .tooltip {
+      position: absolute;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 6px 10px;
+      font-size: 12px;
+      pointer-events: none;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <svg width="700" height="400"></svg>
+
+  <script>
+    // Data: genre counts and cleaned movie names
+    const data = [
+      {genre: "Sci-Fi", count: 3, movies: ["Inception", "Interstellar", "Jurassic Park"]},
+      {genre: "Comedy", count: 3, movies: ["Night at the Museum", "Night at the Museum", "Mean Girls"]},
+      {genre: "Musical", count: 2, movies: ["LaLaLand", "The Sound of Music"]},
+      {genre: "Horror", count: 2, movies: ["The Conjuring", "As Above So Below"]},
+      {genre: "Animation", count: 1, movies: ["Alice in Wonderland 1951"]},
+      {genre: "Action", count: 1, movies: ["Karate Kid"]},
+      {genre: "Romance", count: 1, movies: ["27 Dresses"]},
+      {genre: "Drama", count: 1, movies: ["Perks of Being a Wallflower"]},
+      {genre: "Fantasy", count: 1, movies: ["Soul Land"]}
+    ];
+
+    const svg = d3.select("svg"),
+          margin = {top: 30, right: 20, bottom: 60, left: 50},
+          width = +svg.attr("width") - margin.left - margin.right,
+          height = +svg.attr("height") - margin.top - margin.bottom;
+
+    const g = svg.append("g")
+                 .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const x = d3.scaleBand()
+                .domain(data.map(d => d.genre))
+                .range([0, width])
+                .padding(0.2);
+
+    const y = d3.scaleLinear()
+                .domain([0, d3.max(data, d => d.count)])
+                .nice()
+                .range([height, 0]);
+
+    g.append("g")
+      .attr("class", "x-axis")
+      .attr("transform", `translate(0,${height})`)
+      .call(d3.axisBottom(x))
+      .selectAll("text")
+      .attr("transform", "rotate(30)")
+      .style("text-anchor", "start");
+
+    g.append("g")
+      .attr("class", "y-axis")
+      .call(d3.axisLeft(y).ticks(d3.max(data, d => d.count)));
+
+    // Tooltip div
+    const tooltip = d3.select("body").append("div")
+                      .attr("class", "tooltip")
+                      .style("opacity", 0);
+
+    // Bars
+    g.selectAll(".bar")
+      .data(data)
+      .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", d => x(d.genre))
+      .attr("y", d => y(d.count))
+      .attr("width", x.bandwidth())
+      .attr("height", d => height - y(d.count))
+      .on("mouseover", function(event, d) {
+        tooltip.transition().duration(200).style("opacity", 0.95);
+        tooltip.html(`<strong>${d.genre}</strong><br/>${d.movies.join("<br/>")}`)
+               .style("left", (event.pageX + 10) + "px")
+               .style("top", (event.pageY - 28) + "px");
+      })
+      .on("mousemove", function(event) {
+        tooltip.style("left", (event.pageX + 10) + "px")
+               .style("top", (event.pageY - 28) + "px");
+      })
+      .on("mouseout", function() {
+        tooltip.transition().duration(300).style("opacity", 0);
+      });
+
+    // Title
+    svg.append("text")
+       .attr("x", width / 2 + margin.left)
+       .attr("y", 20)
+       .attr("text-anchor", "middle")
+       .style("font-size", "14px")
+       .text("Favorite Movies by Genre");
+  </script>
+</body>
+</html>

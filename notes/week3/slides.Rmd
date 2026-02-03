@@ -394,7 +394,12 @@ knitr::include_graphics("genres.png")
 ---
 
 <br><br>
-<iframe src="movies.html" width="100%" height="520" style="border:0;"></iframe>
+<iframe
+  src="movies.html"
+  width="1000"
+  height="500"
+  style="border:0; transform: scale(0.95); transform-origin: top left;"></iframe>
+
 
 
 
@@ -429,7 +434,26 @@ countdown(minutes = 5)
 
 ** Pie chart**
 
-Same idea. But instead of bars, you show counts as a pie. But as you can see, it doesn't work well if you have too many categories:
+Same idea. But instead of bars, you show counts as a pie 🥧
+
+<br>
+```{r,echo=F, out.width="65%",fig.align="center"}
+knitr::include_graphics("years_good.png")
+```
+
+---
+
+**Also, donut chart.. why not:**
+
+```{r,echo=F, out.width="68%",fig.align="center"}
+knitr::include_graphics("donut.png")
+```
+
+---
+
+** (not so good) Pie chart**
+
+<br>
 
 <div style="margin-top:-20px;">
 ```{python,echo=F,dpi=300}
@@ -505,23 +529,6 @@ plt.title("Frequency of Courses by Subject")
 plt.show()
 ```
 </div>
-
----
-<br><br>
-```{r,echo=F, out.width="80%",fig.align="center"}
-knitr::include_graphics("years_good.png")
-```
-
-
----
-
-<br><br>
-
-**Also, donut chart.. why not:**
-
-```{r,echo=F, out.width="68%",fig.align="center"}
-knitr::include_graphics("donut.png")
-```
 
 
 ---

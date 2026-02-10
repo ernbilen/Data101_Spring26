@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Week 4: Experiments 🧪</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Eren Bilen, Assistant Professor of Data Analytics" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <link href="libs/countdown/countdown.css" rel="stylesheet" />
+    <script src="libs/countdown/countdown.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Week 4: Experiments 🧪
+]
+.author[
+### Eren Bilen, Assistant Professor of Data Analytics
+]
+.institute[
+### Data 101: Data Science for Humanities and Social Sciences <br> Dickinson College
+]
+
+---
+
+
+
+&lt;style&gt;
+.caption {
+  text-align: center;
+  font-size: 14px;
+}
+&lt;/style&gt;
+
+
+&lt;style&gt;
+.word-under { text-decoration: none; }
+.def { display: none; }
+/* step 2: underline the word */
+.remark-slide-content.step2 .word-under { text-decoration: underline; }
+/* step 3: keep underline and reveal the definition */
+.remark-slide-content.step3 .word-under { text-decoration: underline; }
+.remark-slide-content.step3 .def { display: block; }
+&lt;/style&gt;
+
+
+&lt;!--
+.caption:before {
+  content:"Figure: ";
+  font-weight: bold;
+} --&gt;
+
+
+
+
+
+
+&lt;br&gt;&lt;br&gt;
+
+**Historical overview**
+
+The first known written record of an experiment was in... 
+--
+605 BCE.&lt;br&gt;
+
+--
+→ the Book of Daniel in the Hebrew Bible.
+
+--
+
+The Babylonian King wanted the Israelites to eat rich food and drink wine to get stronger. Daniel argued eating only vegetables and water was enough. He proposed that for 10 days, his group eats vegetables and water, others eat the king's diet.
+
+--
+
+At the end of 10 days, Daniel’s group looked healthier and stronger than those eating the royal food.
+
+---
+
+&lt;br&gt;&lt;br&gt;
+
+**Historical overview**
+
+→ The first known medical experiment by James Lind in 1747. Scurvy emerged as one of the leading causes of death among sailors. The Royal Navy had no treatment, until James Lind proposed an experiment. He took 12 groups of sailors with scurvy. He gave them:
+
+Cider&lt;br&gt;
+Sulfuric acid &lt;br&gt;
+Vinegar &lt;br&gt;
+Sea water &lt;br&gt;
+Garlic &lt;br&gt;
+Oranges and lemon&lt;br&gt;
+
+--
+
+Did any of these treatments work?&lt;br&gt;
+--
+
+Yes, oranges and lemon worked. The sailors in that group were back on duty within a week.
+
+--
+
+From 1790s onwards, scurvy was virtually eliminated from the Royal Navy.
+
+---
+count: false
+
+&lt;br&gt;&lt;br&gt;
+
+**Historical overview**
+
+→ The first known medical experiment by James Lind in 1747. Scurvy emerged as one of the leading causes of death among sailors. The Royal Navy had no treatment, until James Lind proposed an experiment. He took 12 groups of sailors with scurvy. Results:
+
+
+&lt;img src="scurvy.png" style="position:fixed; top:250px; left:150px; width:600px; z-index:9999;"&gt;
+
+---
+
+&lt;br&gt;&lt;br&gt;
+
+**Randomized Control Trial**
+
+Today a modern experiment, or a "Randomized Control Trial" (RCT) looks like the following.
+
+--
+
+Take a group of participants. Randomly split them into treatment and control groups. Track and compare their outcomes at the end of the experiment. &lt;br&gt;
+
+--
+→This randomization gets rid of the "selection" problem.
+
+--
+
+What is the selection problem?: It is the bias that arises in group comparisons when individuals self-select into different groups.&lt;br&gt;
+--
+Eg., Does studying at Harvard improve your knowledge? Or are Harvard students more motivated to start with?&lt;br&gt;
+--
+→This is a testable research question. But is it feasible? What would an experiment look like?&lt;br&gt;
+--
+→Requires us to randomly pick high school seniors and have them attend Harvard (treatment), while have another group attend a state school (control). &lt;br&gt;
+--
+1- Harvard would not consent. &lt;br&gt;
+2- There are ethical concerns too.&lt;br&gt;
+
+--
+→There are Institutional Review Boards (IRBs) at every university and college whose job is to review and approve/reject projects based on ethics.
+
+---
+
+&lt;br&gt;&lt;br&gt;
+
+**Stanford Prison Experiment (1971)**
+
+One of the most controversial experiments, led by psychologist Philip Zimbardo at Stanford University.
+
+24 college students were randomly assigned roles of prisoner or guard in a simulated prison in the basement of Stanford’s psychology building.
+
+The goal was to study how power structures affect behavior.
+
+--
+
+The experiment escalated quickly:&lt;br&gt;
+→ Guards became abusive, prisoners showed signs of emotional distress.
+
+
+It was supposed to last 2 weeks, but was shut down after just 6 days.
+
+→ Definitely not ethical since it led to psychological abuse.
+
+---
+
+&lt;br&gt;&lt;br&gt;
+
+**The Tuskegee Syphilis Study (1932–1972)**
+
+One of the most unethical studies in U.S. history.
+
+--
+
+The U.S. Public Health Service studied 600 Black men in Alabama, 399 with syphilis, 201 without.
+
+--
+
+Those with syphilis were told they were receiving “free medical care,”  
+but were never told they had syphilis.
+
+Penicillin was the standard treatment since the 1940s, but doctors withheld treatment to observe the disease’s progression.
+
+The study continued for 40 years, without &lt;span class="word-under"&gt;informed consent&lt;/span&gt;. 
+
+--
+
+class: step2
+--
+It was only exposed in 1972, after a whistleblower, Peter Buxtun, tipped the media.
+
+
+In 1974, the U.S. Congress passed the National Research Act,  
+which required all federally funded studies to go through IRBs.
+
+--
+
+→ Unfortunately there are other extremely unethical experiments in history: Nazi and Japanese human experiments (1940s), Willowbrook Hepatitis Study (1956–1970, New York). The subjects were never asked for their consent.
+
+
+---
+
+&lt;style&gt;
+.font90 {
+  font-size: 90%;
+}
+&lt;/style&gt;
+
+
+** Activity: Ethical or unethical?**
+
+Suppose your team is the IRB at Dickinson. You received the following proposals. Would you reject or approve them? Describe why.
+
+.font90[
+*Meditation study*&lt;br&gt;
+-Treatment: 10 minutes/day guided meditation for 2 weeks  
+-Control: No change in routine  
+-Outcome: Self evaluated daily stress scores
+
+*Weight Loss study*&lt;br&gt;
+-Treatment: Free smartwatch; asked to go to gym 3×/week  
+-Control: No smartwatch or prompt  
+-Outcome: Weight and mood tracked over 8 weeks
+
+*Social Contact study*&lt;br&gt;
+-Treatment: Asked to avoid all social contact for 24 hours  
+-Control: No change in behavior  
+-Outcome: Self-reported mood score
+
+*Grocery Store Layout study*&lt;br&gt;
+-Treatment: Move fruits/vegetables to front of store  
+-Control: Standard store layout  
+-Outcome: % of carts with 3+ produce items
+
+*Fasting study*&lt;br&gt;
+-Treatment: Fast for 12 hours before math test  
+-Control: Eat normally
+-Outcome: Performance on the test
+]
+
+<div class="countdown" id="timer_1dc973a8" data-update-every="1" tabindex="0" style="top:50%;left:65%;">
+<div class="countdown-controls"><button class="countdown-bump-down">&minus;</button><button class="countdown-bump-up">&plus;</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+---
+
+&lt;br&gt;&lt;br&gt;
+
+**Examples of Modern RCTs in Social Sciences:**
+
+Oregon Health Insurance Experiment (Finkelstein et al., 2012)
+
+Angrist &amp; Lavy (2009): Performance Incentives for Teachers and Students
+
+Scott E Carrell, Mark Hoekstra, James E West (2011, Journal of Public Economics): "Is Poor Fitness Contagious? Evidence from Randomly Assigned Friends"
+
+Gneezy &amp; Rustichini (2000) – "A Fine is a Price"
+
+Falk (2007) – Gift-Exchange with Real Firms
+
+Bilen, Deniz and Bilen Eren (2025, Working Paper): "Collaborating with an Intelligent but Hallucinating Partner
+
+
+
+---
+
+&lt;br&gt;&lt;br&gt;
+**When experiments are infeasible**
+
+→ there is a still a chance to analyze useful data with just observations.
+
+--
+
+Economists have been using "natural experiments" since 1990s. These are chance events that happen in real life that mimick an RCT.&lt;br&gt;
+--
+There are three main types of natural experiments:&lt;br&gt;
+--
+→Regression Discontinuity design&lt;br&gt;
+→Instrumental Variable design&lt;br&gt;
+→Differences in Differences design&lt;br&gt;
+
+--
+
+**Regression Discontinuity design** involves an arbitrary cutoff that decides on an outcome. Around the cutoff, the outcome is arguably random.
+
+Eg, returns to college education: Hoekstra (2009), “The Effect of Attending the Flagship State University on Earnings: A Discontinuity-Based Approach”.&lt;br&gt;
+→ Hoekstra received data from a public university that admitted students based on a hard SAT score and high school GPA cutoff. (1100 on the SAT, Math + Verbal) &lt;br&gt;
+--
+Arguably students just below and just above 1100 points are "similar". The cutoff, 1100 is arbitrary.
+
+
+---
+
+&lt;br&gt;&lt;br&gt;
+**Regression Discontinuity Design**
+
+&lt;img src="rdd1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;br&gt;&lt;br&gt;
+**Regression Discontinuity Design**
+
+&lt;br&gt;
+
+&lt;img src="rdd2.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;br&gt;
+**Regression Discontinuity Design: Birth weight**
+
+→ A baby is classified as very low birth weight if under 1,500gr at birth.&lt;br&gt;
+--
+
+(Not 1487, 1503gr etc. so 1,500 cutoff is somewhat arbitrary.)&lt;br&gt;
+--
+
+Once a baby receives this classification, hospitals have protocols to do additional procedures. Can answer: "Do additional procedures save lives?"
+
+&lt;img src="baby4.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;br&gt;
+**Regression Discontinuity Design: Birth weight**
+
+→ A baby is classified as very low birth weight if under 1,500gr at birth.&lt;br&gt;
+(Not 1487, 1503gr etc. so 1,500 cutoff is somewhat arbitrary.)&lt;br&gt;
+Once a baby receives this classification, hospitals have protocols to do additional procedures. Can answer: "Do additional procedures save lives?"
+
+&lt;img src="baby5.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+&lt;br&gt;
+**Regression Discontinuity Design: Birth weight**
+
+→ A baby is classified as very low birth weight if under 1,500gr at birth.&lt;br&gt;
+(Not 1487, 1503gr etc. so 1,500 cutoff is somewhat arbitrary.)&lt;br&gt;
+Once a baby receives this classification, hospitals have protocols to do additional procedures. Can answer: "Do additional procedures save lives?"
+
+&lt;img src="baby1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+&lt;br&gt;
+**Regression Discontinuity Design: Birth weight**
+
+→ A baby is classified as very low birth weight if under 1,500gr at birth.&lt;br&gt;
+(Not 1487, 1503gr etc. so 1,500 cutoff is somewhat arbitrary.)&lt;br&gt;
+Once a baby receives this classification, hospitals have protocols to do additional procedures. Can answer: "Do additional procedures save lives?"
+
+&lt;img src="baby2.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+&lt;br&gt;
+**Regression Discontinuity Design: Birth weight**
+
+→ A baby is classified as very low birth weight if under 1,500gr at birth.&lt;br&gt;
+(Not 1487, 1503gr etc. so 1,500 cutoff is somewhat arbitrary.)&lt;br&gt;
+Once a baby receives this classification, hospitals have protocols to do additional procedures. Can answer: "Do additional procedures save lives?"
+
+&lt;img src="baby3.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+
+&lt;br&gt;&lt;br&gt;
+**Instrumental Variable design**
+
+Suppose you want to know if Walmarts cause people to gain weight. (not necessarily unhealthy, but more affordable + more options)
+
+X: Whether there is a Walmart in your neighborhood (0-1 binary)&lt;br&gt;
+Y: obesity rate in the neighborhood &lt;br&gt;
+
+We can't just compare areas with and without Walmart because they can look very different. Walmart does not open its stores randomly. (location, population, income..)
+
+
+---
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+**Instrumental Variable design**
+
+&lt;img src="walmart.png" width="120%" style="display: block; margin: auto;" /&gt;
+
+--
+
+→ find an external force that only applies to your X variable (store openings) and not Y (except through X).
+
+
+
+---
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+**Instrumental Variable design**
+
+&lt;iframe title="vimeo-player" 
+        src="https://player.vimeo.com/video/502054333?h=54f95a86ce" 
+        width="100%" height="60%" frameborder="0" 
+        referrerpolicy="strict-origin-when-cross-origin" 
+        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+        allowfullscreen
+        style="margin-top:-1px; margin-left:2px;"&gt;
+&lt;/iframe&gt;
+
+--
+
+→ Z, the instrument, can be "distance to an existing Walmart". If you lived near Arkansas you arbitrarily had a higher likelihood of getting a Walmart in your town.
+
+
+---
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+**Instrumental Variable design**
+
+&lt;iframe title="vimeo-player" 
+        src="https://player.vimeo.com/video/502054333?h=54f95a86ce" 
+        width="100%" height="60%" frameborder="0" 
+        referrerpolicy="strict-origin-when-cross-origin" 
+        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+        allowfullscreen
+        style="margin-top:-1px; margin-left:2px;"&gt;
+&lt;/iframe&gt;
+
+→ Courtemanche &amp; Carden (2009, JUE) find that Walmarts actually reduced obesity, due to lower prices and broader access to food and non-food products eg, exercise items.
+
+---
+
+&lt;br&gt;&lt;br&gt;
+**Differences and Differences design**
+
+→ Suppose you want to study the effects of minimum wage. Economic theory says it is expected to reduce employment. But does it?
+
+What would an RCT for this look like? Is it ethical? 
+--
+No.
+
+--
+
+The only other option is to use a natural experiment:
+
+Card &amp; Krueger (1994, AER) used a minimum wage increase in New Jersey in April 1994 from $4.25 to $5.05, and compared fast-food employment in NJ (treatment) and PA (control) to estimate its impact.
+
+
+
+→ This is called a Differences in differences design. In this case, you observe treated unit before and after the wage increase and the control unit before and after the wage increase (in NJ).
+
+
+---
+
+&lt;br&gt;&lt;br&gt;
+**Differences and Differences design**
+
+&lt;br&gt;&lt;br&gt;
+
+&lt;div style="display:flex; align-items:flex-start;"&gt;
+  &lt;img src="card1.png" style="width:50%; margin-right:10px;"&gt;
+  &lt;img src="card2.png" style="width:50%; margin-top:-1px;"&gt;
+&lt;/div&gt;
+
+---
+
+&lt;br&gt;&lt;br&gt;
+**Differences and Differences design**
+
+
+&lt;img src="card3.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;br&gt;&lt;br&gt;
+**Differences and Differences design**
+
+
+&lt;img src="card4.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+--
+
+.pull-left[
+→ Take change in NJ - change in PA&lt;br&gt;
+(21.03-20.44) - (21.17-23.33) = &lt;br&gt;
+0.59 - (-2.16) = 2.76
+]
+
+--
+.pull-right[
+Why?: reduced turnover (cuts down training cost), higher morale which boosts sales etc.
+]
+
+---
+
+&lt;br&gt;&lt;br&gt;
+**External validity**
+
+⚠️In science, especially in social sciences, one study is almost never definitive.
+
+Your findings are only applicable to your setting or sample. The extent to which your results are applicable to other settings is **external validity**.
+
+Can you find groups in the population who are outside the scope of earlier studies we discussed?
+
+---
+
+&lt;br&gt;&lt;br&gt;
+
+** Activity: Determine the type of natural experiment**
+
+Determine the type of natural experiment used in each study below. Explain why.
+
+Angrist &amp; Lavy (1999, QJE): Effect of class size on student achievement.&lt;br&gt;
+Takes advantage of an institutional rule that requires a new class to be formed once enrollment exceeds 40 students in elementary and middle schools.
+
+Oreopoulos (2006, AER): Compulsory schooling and lifetime earnings.&lt;br&gt;
+Takes advantage of the 1947 U.K. reform that raised the minimum school-leaving age from 14 to 15.
+
+Angrist (1990, AER): Military service in the Vietnam War and lifetime earnings.&lt;br&gt;
+Takes advantage of the draft lottery rule where birthdates earlier in the calendar were given lower numbers and higher draft risk.
+
+<div class="countdown" id="timer_f49f2cad" data-update-every="1" tabindex="0" style="top:70%;left:35%;">
+<div class="countdown-controls"><button class="countdown-bump-down">&minus;</button><button class="countdown-bump-up">&plus;</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+
+---
+
+&lt;br&gt;&lt;br&gt;
+
+**Experiments in non-academic settings: A-B Testing**
+
+The way companies such as Amazon, FB... decide on their website layouts.&lt;br&gt;
+→ Show new design to a random group of users. You give consent by being on the webpage.
+
+Tone of ChatGPT's responses: Prefer Option 1 or Option 2?
+
+&lt;br&gt;
+
+
+**Experiments in humanities:** &lt;br&gt;
+
+Live performance vs. a recorded version. (Reason 2004, Theatre Journal)
+
+Randomize line breaks in the same poem, ask whether readers rate it as more or less emotionally powerful. (Tsur 1998, Poetic Rhythm)
+
+Art interpretation: Show participants abstract paintings with vs. without curator labels, then ask whether interpretation and reported enjoyment differ. (Hekkert &amp; van Wieringen 1996, Empirical Studies of the Arts)
+
+---
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+&lt;img src="thinking.png" width="55%" style="display: block; margin: auto;" /&gt;
+
+&lt;div style="text-align: center;"&gt;
+Questions..?
+
+&lt;br&gt;&lt;br&gt;
+
+
+
+&lt;/div&gt;
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(https://pbs.twimg.com/profile_images/1121082444596350976/IH7Sq90N_400x400.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 110px;
+  height: 128px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

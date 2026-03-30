@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Week 9: Modeling 📈️</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Eren Bilen, Assistant Professor of Data Analytics" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <link href="libs/countdown/countdown.css" rel="stylesheet" />
+    <script src="libs/countdown/countdown.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Week 9: Modeling 📈️
+]
+.author[
+### Eren Bilen, Assistant Professor of Data Analytics
+]
+.institute[
+### Data 101: Data Science for Humanities and Social Sciences <br> Dickinson College
+]
+
+---
+
+
+
+&lt;style&gt;
+.caption {
+  text-align: center;
+  font-size: 14px;
+}
+&lt;/style&gt;
+
+
+&lt;style&gt;
+.word-under { text-decoration: none; }
+.def { display: none; }
+/* step 2: underline the word */
+.remark-slide-content.step2 .word-under { text-decoration: underline; }
+/* step 3: keep underline and reveal the definition */
+.remark-slide-content.step3 .word-under { text-decoration: underline; }
+.remark-slide-content.step3 .def { display: block; }
+&lt;/style&gt;
+
+
+&lt;!--
+.caption:before {
+  content:"Figure: ";
+  font-weight: bold;
+} --&gt;
+
+
+
+
+
+
+#  Boston Housing Data 🏠
+
+Below is a portion of the **Boston** data set:
+&lt;br&gt;
+
+&lt;table style="font-size: 14px; border-collapse: collapse; margin: auto;"&gt;
+  &lt;thead&gt;
+    &lt;tr style="background-color:#f0f0f0;"&gt;
+      &lt;th&gt;crim&lt;/th&gt;&lt;th&gt;zn&lt;/th&gt;&lt;th&gt;indus&lt;/th&gt;&lt;th&gt;chas&lt;/th&gt;&lt;th&gt;nox&lt;/th&gt;
+      &lt;th&gt;rm&lt;/th&gt;&lt;th&gt;age&lt;/th&gt;&lt;th&gt;dis&lt;/th&gt;&lt;th&gt;rad&lt;/th&gt;&lt;th&gt;tax&lt;/th&gt;
+      &lt;th&gt;ptratio&lt;/th&gt;&lt;th&gt;medv&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody style="text-align:center;"&gt;
+    &lt;tr&gt;&lt;td&gt;0.00632&lt;/td&gt;&lt;td&gt;18&lt;/td&gt;&lt;td&gt;2.31&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0.538&lt;/td&gt;&lt;td&gt;6.575&lt;/td&gt;&lt;td&gt;65.2&lt;/td&gt;&lt;td&gt;4.0900&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;296&lt;/td&gt;&lt;td&gt;15.3&lt;/td&gt;&lt;td&gt;24.0&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;0.02731&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;7.07&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0.469&lt;/td&gt;&lt;td&gt;6.421&lt;/td&gt;&lt;td&gt;78.9&lt;/td&gt;&lt;td&gt;4.9671&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;242&lt;/td&gt;&lt;td&gt;17.8&lt;/td&gt;&lt;td&gt;21.6&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;0.02729&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;7.07&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0.469&lt;/td&gt;&lt;td&gt;7.185&lt;/td&gt;&lt;td&gt;61.1&lt;/td&gt;&lt;td&gt;4.9671&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;242&lt;/td&gt;&lt;td&gt;17.8&lt;/td&gt;&lt;td&gt;34.7&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;0.03237&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;2.18&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0.458&lt;/td&gt;&lt;td&gt;6.998&lt;/td&gt;&lt;td&gt;45.8&lt;/td&gt;&lt;td&gt;6.0622&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;td&gt;222&lt;/td&gt;&lt;td&gt;18.7&lt;/td&gt;&lt;td&gt;33.4&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;0.06905&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;2.18&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0.458&lt;/td&gt;&lt;td&gt;7.147&lt;/td&gt;&lt;td&gt;54.2&lt;/td&gt;&lt;td&gt;6.0622&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;td&gt;222&lt;/td&gt;&lt;td&gt;18.7&lt;/td&gt;&lt;td&gt;36.2&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;0.02985&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;2.18&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0.458&lt;/td&gt;&lt;td&gt;6.430&lt;/td&gt;&lt;td&gt;58.7&lt;/td&gt;&lt;td&gt;6.0622&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;td&gt;222&lt;/td&gt;&lt;td&gt;18.7&lt;/td&gt;&lt;td&gt;28.7&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;br&gt;
+
+&lt;div style="display:flex; align-items:flex-start; justify-content:center; gap:-10px;"&gt;
+
+  &lt;div style="flex:0 0 60%; font-size:12px; line-height:1.4; text-align:left;margin-top:-50px"&gt;
+    &lt;p&gt;&lt;b&gt;crim:&lt;/b&gt; per capita crime rate by town.&lt;br&gt;
+    &lt;b&gt;zn:&lt;/b&gt; proportion of residential land zoned for lots over 25,000 sq.ft.&lt;br&gt;
+    &lt;b&gt;indus:&lt;/b&gt; proportion of non-retail business acres per town.&lt;br&gt;
+    &lt;b&gt;chas:&lt;/b&gt; Charles River dummy variable (=1 if tract bounds river; 0 otherwise).&lt;br&gt;
+    &lt;b&gt;nox:&lt;/b&gt; nitrogen oxides concentration (parts per 10 million).&lt;br&gt;
+    &lt;b&gt;rm:&lt;/b&gt; average number of rooms per dwelling.&lt;br&gt;
+    &lt;b&gt;age:&lt;/b&gt; proportion of owner-occupied units built prior to 1940.&lt;br&gt;
+    &lt;b&gt;dis:&lt;/b&gt; weighted mean of distances to five Boston employment centers.&lt;br&gt;
+    &lt;b&gt;rad:&lt;/b&gt; index of accessibility to radial highways.&lt;br&gt;
+    &lt;b&gt;tax:&lt;/b&gt; full-value property-tax rate per $10,000.&lt;br&gt;
+    &lt;b&gt;ptratio:&lt;/b&gt; pupil-teacher ratio by town.&lt;br&gt;
+    &lt;b&gt;medv:&lt;/b&gt; median value of owner-occupied homes in $1000s.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div style="flex:0 0 50%;"&gt;
+    &lt;img src="assets/img/image1.png" width="100%" style="display:block; margin:auto; margin-top:-20px;"&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+
+---
+# Unsupervised learning vs Supervised learning
+
+**Unsupervised learning:** find subgroups in the dataset  
+- group towns that look *similar* in terms of ALL or some variables  
+- searches patterns  
+- it only has X variables, no Y variable  
+
+&lt;br&gt;
+
+**Supervised learning:** what are the variables that might impact house prices?  
+How are they impacting house prices?  
+- tries to estimate a “function” that maps X variable(s) to Y variable  
+- can be used to explain a relationship (inference), or to predict the outcome of a given X.
+
+General form of a function:
+`$$y = f(x)$$`
+
+---
+#  The models 
+
+Unsupervised  learning  models:
++ Clustering 
++ k-means
++ hierarchical clustering
++ Principal  Component  Analysis 
++ …
+	
+&lt;br&gt;
+
+Supervised  learning  models:
++ Linear  regression
++ K-nearest  neighborhood  (KNN)
++ Support  Vector  Machines
++ Naïve  Bayes
++ Decision  Trees  (and  their  extensions)
++ Neural  Network
++ …
+
+---
+&lt;br&gt;
+# Types of “fitting”
+
+**Classification** refers to the type of supervised learning models  
+with a binary response variable, for example:  
+
+- Is this email a spam or not?  
+- Is this patient diagnosed with cancer or not?  
+- Does this picture include a cat or not?  
+
+&lt;br&gt;
+
+**Regression** refers to the type of supervised learning models  
+with a continuous numeric response variable, for example:  
+
+- Predicting house prices based on size and location.
+- Estimating a student’s exam score from study hours.
+
+---
+
+&lt;br&gt;
+
+#Activity: Classification or regression?
+
+1. Predicting the bias score of a news article on a continuous scale (e.g., –1 = left, +1 = right).
+
+2. Is a student’s essay written by a human or by AI?
+
+3. Predicting whether a historical text was written by Author A.
+
+4. Estimating the publication year of an anonymous document.
+
+5. Estimating a movie’s Rotten Tomatoes score.
+
+<div class="countdown" id="timer_6ee6c328" data-update-every="1" tabindex="0" style="top:60%;left:35%;">
+<div class="countdown-controls"><button class="countdown-bump-down">&minus;</button><button class="countdown-bump-up">&plus;</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+
+
+---
+
+&lt;br&gt;
+Recognize hand-written digits using the MNIST database:
+![](assets/img/image2.png)
+
+---
+
+Predict the age of a person using their grocery store spending data?
+.pull-left[![](assets/img/image4.jpeg)]
+
+&lt;br&gt;&lt;br&gt;
+
+
+&lt;div style="margin-top:40px; margin-left:400px;"&gt;
+Predict the age of a person from their picture?
+&lt;/div&gt;
+.pull-right[![](assets/img/image3.jpeg)]
+
+---
+# Why do we need models?
+
+A simplified version:
+
+&lt;div style="display:flex; align-items:center; justify-content:center; gap:40px; margin-top:40px;"&gt;
+  &lt;div style="flex:1; text-align:center;"&gt;
+    &lt;img src="assets/img/image5.png" style="width:110%; max-width:600px;"&gt;
+  &lt;/div&gt;
+  &lt;div style="flex:1; text-align:center;"&gt;
+    &lt;img src="assets/img/image6.png" style="width:100%; max-width:400px;"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+---
+# Why do we need models?
+
+A simplified version:
+
+&lt;img src="assets/img/image55.png" style="width:150%; max-width:800px;margin-left:-20px;margin-top:-20px"&gt;
+
+
+---
+# Why do we need models?
+
+A simplified version:
+
+&lt;img src="assets/img/image55.png" style="width:150%; max-width:800px;margin-left:-20px;margin-top:-20px"&gt;
+
+A model could be: &lt;br&gt;
+Miles  Driven  =  10,000 `\(\times\)` Age &lt;br&gt;
+Number  of  births  =  8  –  10 `\(\times\)` Literacy rate
+
+---
+# Terms to know
+
+**Training** dataset: used to build and fit a model.  
+The model “learns” patterns from this data by adjusting its parameters.
+
+**Testing** dataset: used to evaluate the model’s performance  
+on new data coming from the same population (different from the training set.)
+
+**Prediction:** applying the trained model on the testing dataset  
+or new data to estimate outcomes.
+
+This whole process is known as Machine Learning.
+
+Artificial Intelligence is a type of Machine Learning. Specifically: deep learning, or neural network.
+
+Neural nets are simply more complicated f(x) functions.
+
+---
+# Activity: chess
+
+Chess is a two player board game where each player's goal is to make the best moves in a given position.
+
+&lt;img src="assets/img/chess.png" style="width:40%; max-width:600px; margin-left:240px;"&gt;
+
+Can you think of what steps must be taken to train a model that can predict the likelihood of a player making a mistake (ie, playing a bad move) in a given position?
+
+<div class="countdown" id="timer_d244e25f" data-update-every="1" tabindex="0" style="top:60%;left:75%;">
+<div class="countdown-controls"><button class="countdown-bump-down">&minus;</button><button class="countdown-bump-up">&plus;</button></div>
+<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+---
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+&lt;img src="assets/img/complexity.png" style="width:110%; max-width:1000px; margin-left:-40px;"&gt;
+
+---
+#  Linear regression 
+
+Linear  regression  assumes  a  linear  relationship  between  the  predictors  and  the  response.
+
+MilesDriven  =  b `\(\times\)` Age ✅ &lt;br&gt;
+MilesDriven  =  `\(2^{b \times Age}\)`
+
+&lt;br&gt;
+
+&lt;img src="assets/img/image5.png" style="width:70%; max-width:800px;margin-left:-20px;margin-top:-20px"&gt;
+
+---
+#  Linear regression 
+
+Linear  regression  assumes  a  linear  relationship  between  the  predictors  and  the  response.
+
+MilesDriven  =  b `\(\times\)` Age ✅ 
+
+A  linear  relationship  must  have  the  following  form:
+y = a + bx
+where  x  is  a  predictor,  and  y  is  the  response; a is the intercept, b is the slope.
+
+&lt;br&gt;
+
+&lt;img src="assets/img/image5.png" style="width:70%; max-width:800px;margin-left:-20px;margin-top:-20px"&gt;
+
+---
+
+#  Multilinear regression
+
+You can use multiple x variables with a linear regression:
+
+`\(y = b_0 + b_1 x_1  +  b_2 x_2  + …\)`
+
+The  goal  of  linear  regression  is  to  calculate  `\(b_0 ,  b_1 ,  b_2 ,  …\)`  so  that  the  model  best  fits  the  training  set.
+
+How  do  we  define  “fit”?
+
+---
+
+#  Model “fit” 
+
+The  most  classical  way  to  decide  ”fit“  is  to  measure  how  big  of  a  “mistake”  the  model  made  on  the  training  set.
+
+&lt;div style="display: flex; justify-content: center; align-items: flex-start; gap: 30px; margin-top: -20px; margin-left:-50px"&gt;
+  &lt;div style="flex: 1; text-align: center;"&gt;
+    &lt;img src="assets/img/reg1.png" style="width:120%; max-width:700px;"&gt;
+  &lt;/div&gt;
+  &lt;div style="flex: 1; text-align: center;"&gt;
+    &lt;img src="assets/img/reg2.png" style="width:120%; max-width:700px;"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+---
+#  Residuals
+
+We need a more scientific approach. Notice the differences between what the model predicts and actual values, aka, residuals. For example: &lt;br&gt;
+
+&lt;img src="assets/img/reg3.png" style="width:100%; max-width:1400px;margin-left:-20px;margin-top:-20px"&gt;
+
+
+---
+#  Residuals 
+
+More generally:
+
+&lt;img src="assets/img/reg4.png" style="width:100%; max-width:1400px;margin-left:-20px;margin-top:-20px"&gt;
+
+---
+#  Residuals
+
+The goal  is  to find a fit that  minimizes  the  sum  of  squared  residuals. This  is  called  the  Ordinary  Least  Squared  (OLS)  Method.
+
+The  OLS  method  is  to  find the parameters,  `\(b_1,  b_2, …\)`  such  that  the  Sum  of  Squared  Residuals (SSR)  is  minimized:
+
+$$ min \,\,\,SSR =  \sum_i^n{(y_i-\hat{y_i})^2} $$
+
+
+---
+#  Interpret linear regression results
+
+Outcome variable: price of a car
+
+![](assets/img/image8.png)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(https://pbs.twimg.com/profile_images/1121082444596350976/IH7Sq90N_400x400.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 110px;
+  height: 128px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

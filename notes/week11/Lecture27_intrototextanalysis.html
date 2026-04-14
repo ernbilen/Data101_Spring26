@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Week 10: Intro to Text Analysis 📖</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Eren Bilen, Assistant Professor of Data Analytics" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Week 10: Intro to Text Analysis 📖
+]
+.author[
+### Eren Bilen, Assistant Professor of Data Analytics
+]
+.institute[
+### Data 101: Data Science for Humanities and Social Sciences <br> Dickinson College
+]
+
+---
+
+
+
+
+
+
+# It may seem obvious but.. what is text?
+
+- From a sociolinguistic perspective: any symbolically encoded language.&lt;br&gt;These come in many types:
+  - Alphabetic – symbols (letters) to represent vowels and consonants (e.g., Latin)
+  - Abjads – symbols to represent consonants, with diacritics (or reused consonants) to represent vowels (e.g., Arabic, Hebrew)
+  - Syllabic – Symbol systems representing consonants plus inherent vowels (e.g., Devanagari)
+  - Semanto-phonetic – Symbols that carry meaning and/or sounds (e.g., Chinese)
+- Plus, there are additional writing systems: Braille, shorthand, phonetic alphabets
+
+---
+
+# What is Text?
+
+- From a computer perspective a binary encoding system for storing written language symbols from the world’s various systems
+
+&lt;div style="display:flex; gap:32px; align-items:flex-start; justify-content:center;"&gt;
+  &lt;img src="assets/media/slide3_2.png" alt="left" style="max-width:20%; height:auto;"&gt;
+  &lt;img src="assets/media/slide3_1.png" alt="right" style="max-width:48%; height:auto;"&gt;
+&lt;/div&gt;
+
+- From ASCII (7-bits) to Unicode: An international standard that supports up to four bytes (32 bits) per symbol and that encodes 137,439 characters from 146 different scripts.
+
+
+---
+
+# What is text?
+
+&lt;div style="display:flex; gap:24px; align-items:center; justify-content:space-between;"&gt;
+
+  &lt;!-- Wider text box --&gt;
+  &lt;div style="flex:2;"&gt;
+    &lt;ul&gt;
+      &lt;li&gt;From a data scientist’s perspective, a set of documents organized into a corpus, where each document contains an encoded sample of written language, generally:&lt;/li&gt;
+      &lt;li&gt;Human readable files (e.g., plain text)&lt;/li&gt;
+      &lt;li&gt;Metadata describing data source, date of capture, speaker/author, etc.&lt;/li&gt;
+      &lt;li&gt;Character/symbol encoding appropriate to language (Arabic, Hebrew...)&lt;/li&gt;
+      &lt;li&gt;One file per document, or container file includes document separator characters (e.g., newline)&lt;/li&gt;
+      &lt;li&gt;Each file contains unstructured, “natural” language content – generally the same “type” of content for each file in the corpus (i.e., don’t mix tweets with book chapters)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Narrower image box --&gt;
+  &lt;div style="flex:1; text-align:center;"&gt;
+    &lt;img src="assets/media/slide4_1.jpg" alt="Corpus illustration" style="width:110%; max-width:500px; height:auto; border-radius:6px;"&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+
+---
+
+# “Unstructured” is the Key
+
+- Natural language is notoriously flexible and ambiguous
+- – even simple tasks like parsing are complicated:
+- Contractions; Compound words; Misspellings; Proper Names; Preposition Attachment; Vernacular
+- Transforming a set of documents into data that allow for comparisons, linkages, visualization, or other analysis, is complex and contains many decisions
+
+![](assets/media/slide5_1.png){width=70%}
+
+---
+
+# Analytical Overview
+
+&lt;div style="text-align:center; margin-top:10px;"&gt;
+  &lt;img src="assets/media/slide6_1.png" alt="Slide 6 image" style="width:90%; height:auto; border-radius:6px;"&gt;
+  &lt;br&gt;
+&lt;/div&gt;
+
+
+Image Credit: Banks et al. (2018), Fig. 1, p. 447
+
+---
+
+# Dictionary-Based Content Analysis
+
+&lt;div style="display:flex; gap:24px; align-items:center; justify-content:space-between;"&gt;
+
+  &lt;!-- Text box (wider side) --&gt;
+  &lt;div style="flex:1.4; font-size:22px;"&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Simplest form of automated text analysis&lt;/li&gt;
+      &lt;li&gt;Reduce texts to frequency counts of various vocabulary words&lt;/li&gt;
+      &lt;li&gt;Lookup vocabulary words in appropriate dictionaries – e.g., positive/negative sentiment&lt;/li&gt;
+      &lt;li&gt;Quantify results based on connection between word frequency and dictionary connotations&lt;/li&gt;
+      &lt;li&gt;Results can be used to compare documents to one another or to summarize corpora&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Image box (narrower side) --&gt;
+  &lt;div style="flex:1.5; text-align:center;"&gt;
+    &lt;img src="assets/media/slide7_1.png" alt="Dictionary-based text analysis" style="width:90%; max-width:500px; height:auto; border-radius:6px;"&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+
+---
+
+# Statistical Approaches
+
+&lt;img src="assets/media/slide8_1.png" style="width:70%; height:auto; border-radius:6px;"&gt;
+
+- Treat each text fragment as a collection of units/words, without regard to word order
+- Use many text fragments – e.g. chapters from a book; each fragment is considered a “document”
+- Compute a term-document matrix (TDM) (or document term matrix); a sparse matrix pinning down the count of appearance of a term (aka word) in a document
+- Conduct statistical or machine learning analysis on the
+- TDM to reveal patterns
+
+
+---
+
+# Example TDM
+
+&lt;img src="assets/media/slide9_1.jpeg" alt="Slide 6 image" style="width:70%; height:auto; border-radius:6px;"&gt;
+
+---
+
+# Example Application: Spam Filter
+
+&lt;img src="assets/media/slide10_1.jpeg" style="width:70%; height:auto; border-radius:6px;"&gt;
+
+---
+
+# Natural Language Processing
+
+- Tokenizes and tags text to detect and preserve part-of-speech
+- Post processing of tokens tries to resolve syntactic dependencies, co-references, names of entities, sequences of events, etc.
+- Machine learning can then be used to solve a variety of difficult challenges such question answering, information retrieval, and machine translation, e.g., ChatGPT, Alexa, Siri…
+
+&lt;div style="text-align:center; margin-top:1px;"&gt;
+&lt;img src="assets/media/slide11_1.png" style="width:70%; height:auto; border-radius:6px;"&gt;
+&lt;/div&gt;
+
+---
+
+# Research Questions to Address with Text
+
+- Organizations: Examine the dynamics of team formation by analyzing listserv emails
+- Economics: Analyze the content of job postings to estimate the demand for particular jobs across years/regions
+- Sociology: Track levels of hate speech over time using text from online forums
+- Politics: Detect the proportion of fear-based appeals in campaign rhetoric based on party affiliation
+- Psychology: Conduct sentiment analysis on open ended comments in surveys to detect faking
+
+---
+
+# Text Data Sources
+
+- https://github.com/niderhoff/nlp-datasets &lt;br&gt;
+ Alphabetic list of freely available text corpora
+- https://www.gutenberg.org &lt;br&gt;
+ Project Gutenberg, more than 57,000 public domain books available in various formats
+- https://en.wikipedia.org/wiki/List_of_text_corpora &lt;br&gt;
+ List of corpora for more than 30 languages including “parallel corpora” where the same text is available in two or more languages
+- https://gengo.ai/datasets/the-best-25-datasets-fornatural-language-processing/ As the URL suggests. . .
+
+
+---
+
+# How to start analyzing text data?
+
+- Read in a text file, separating into paragraphs, each of which will be treated as a separate “document”
+- Tokenize the text into a bag of words, representing it as a Document-Term Matrix
+- Extract term frequency information
+- Visualize term frequency information
+- Match term frequency to dictionaries of positive and negative connoted words (merge)
+- Visualize results
+- **Research question:** In a nomination acceptance speech, do positive sentiments predominate over negative ones?
+
+&lt;br&gt;&lt;br&gt;
+Let's boot up a jupyter notebook file and start!
+
+---
+
+# Read in a Speech
+
+&lt;pre style="background:#f5f5f5; color:#333; padding:12px; border-radius:6px; font-family:'Courier New', monospace; font-size:20px;"&gt;
+&lt;span style="color:#008000;"&gt;# Read the data in&lt;/span&gt;
+&lt;span style="color:#0000FF;"&gt;with&lt;/span&gt; open(&lt;span style="color:#a31515;"&gt;"speech.txt"&lt;/span&gt;, &lt;span style="color:#a31515;"&gt;"r"&lt;/span&gt;, encoding=&lt;span style="color:#a31515;"&gt;"utf-8"&lt;/span&gt;) &lt;span style="color:#0000FF;"&gt;as&lt;/span&gt; f:
+    char_list = f.readlines()
+&lt;span style="color:#0000FF;"&gt;print&lt;/span&gt;(char_list[:5])
+&lt;/pre&gt;
+
+
+&lt;div style="background:#f5f5f5; color:#333; padding:14px; border-radius:6px; font-family:'Courier New', monospace; font-size:19px; line-height:1.5;"&gt;
+
+&amp;gt;&amp;gt;&amp;gt; "I speak tonight of gratitude, achievement, and high hopes for our country.
+
+Tonight, I think first of those who helped get me here
+
+- starting with the people of Tennessee. Then, those who braved the first snows of Iowa and New Hampshire -- and all of you here, from all over this country, who have come with me into the warm sunlight of this great city.
+
+While I can't thank each of you individually in words,
+I do so in my heart.
+
+And I know you won't mind if I single out someone who
+
+has just spoken so eloquently, someone I've loved with my whole heart since the night of my high school senior prom -- my wife, Tipper. We've been lucky enough to find each other all over again at each new stage of our lives - and we just celebrated our 30th wedding anniversary.
+
+&lt;/div&gt;
+
+---
+
+# Load Libraries + Dictionaries
+
+- We need tools for tables, plots, tokenization, stopwords, and word counts.
+- We also load the speech and the two sentiment dictionaries.
+
+
+```python
+import pandas as pd # for tables and data frames
+import matplotlib.pyplot as plt # for visualizations
+from nltk.tokenize import word_tokenize # to split text into tokens
+from nltk.corpus import stopwords # to remove common filler words
+from collections import Counter # to count word frequencies
+
+# Read the data in
+with open('speech.txt') as f:
+    text = f.read().lower()
+
+# Read the dictionaries
+with open('positive-words.txt', encoding='latin-1') as f:
+    poswords = f.readlines()
+
+with open('negative-words.txt', encoding='latin-1') as f:
+    negwords = f.readlines()
+```
+
+---
+
+# Tokenize the Speech
+
+- `word_tokenize()` turns the speech into a list of tokens.
+- A token can be a word, number, or punctuation mark.
+
+
+```python
+tokens = word_tokenize(text)
+```
+
+# A Quick Python Refresher
+
+- A reminder of how a `for` loop builds a list:
+- We use the same idea in the next slide when creating our cleaned token list.
+
+
+```python
+mylist = []
+for i in range(1,4):
+    mylist.append(i)
+mylist
+```
+
+```
+## [1, 2, 3]
+```
+
+---
+
+# Remove Stopwords + Punctuation
+
+- We remove common words like "the" and "and".
+- We also keep only alphabetic tokens with `isalpha()`.
+- This leaves us with a cleaner set of content words.
+
+
+```python
+# get rid of stopwords like a, an, the ... and punctuation: ! , .
+stop_words = set(stopwords.words('english'))
+
+clean_token = []
+for w in tokens:
+    if w.isalpha() and w not in stop_words:
+        clean_token.append(w)
+```
+
+---
+
+# Most Frequent Clean Words
+
+- `Counter(clean_token)` counts how many times each word appears.
+- Then we convert those counts into a data frame and sort from high to low.
+
+
+```python
+freq = Counter(clean_token) # count each remaining word
+df = pd.DataFrame(freq.items(),columns=['word','count'])\
+                            .sort_values('count',ascending=False)\
+                            .reset_index(drop=True)
+top_words = df.head(10)
+top_words
+```
+
+```
+##        word  count
+## 0   america     29
+## 1  families     26
+## 2    people     25
+## 3       new     24
+## 4    family     24
+## 5   tonight     22
+## 6  children     20
+## 7     every     19
+## 8     fight     18
+## 9       one     18
+```
+
+---
+
+# Visualize the Most Frequent Words
+
+
+```python
+fig, ax = plt.subplots(figsize=(7,3))
+ax.bar(top_words['word'], top_words['count'], color='skyblue')
+ax.set_xlabel('word')
+ax.set_ylabel('count')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+```
+
+
+&lt;img src="Lecture27_intrototextanalysis_files/figure-html/unnamed-chunk-7-1.png" width="672" /&gt;
+
+
+---
+
+# Lemmatization: Group Word Variants
+
+- Lemmatization helps matching related forms to one base word.
+- So `families` becomes `family`, and `children` becomes `child`.
+
+
+```python
+from nltk.stem import WordNetLemmatizer # for auto-lemmatization
+
+lemmatizer = WordNetLemmatizer() # initialize lemmatizer
+lemmatizer.lemmatize('families') # test
+```
+
+```
+## 'family'
+```
+
+```python
+lemmatizer.lemmatize('children') # another test
+```
+
+```
+## 'child'
+```
+
+---
+
+# Rebuild the Frequency Table with Lemmas
+
+
+
+```python
+lemmas = []
+for w in clean_token:
+    word = lemmatizer.lemmatize(w) # this is where lemmatizer runs
+    lemmas.append(word) # append back
+
+freq = Counter(lemmas) # get counts
+
+df = pd.DataFrame(freq.items(),columns=['word','count'])\
+                            .sort_values('count',ascending=False)\
+                            .reset_index(drop=True)
+```
+
+---
+
+# Top Lemmas After Cleaning
+
+
+
+```python
+top_words = df.head(10)
+top_words
+```
+
+```
+##       word  count
+## 0   family     50
+## 1    child     29
+## 2  america     29
+## 3   people     25
+## 4      new     24
+## 5  tonight     22
+## 6     year     21
+## 7    every     19
+## 8      one     19
+## 9    fight     18
+```
+
+---
+
+# Visualize the Top Lemmas
+
+
+```python
+fig, ax = plt.subplots(figsize=(7,3))
+ax.bar(top_words['word'], top_words['count'], color='skyblue')
+ax.set_xlabel('word')
+ax.set_ylabel('count')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+```
+
+&lt;div style="margin-bottom:-30px;"&gt;&lt;/div&gt;
+
+&lt;img src="Lecture27_intrototextanalysis_files/figure-html/unnamed-chunk-12-3.png" width="672" /&gt;
+
+
+
+---
+
+# Prepare the Sentiment Dictionaries
+
+- Now we clean the positive and negative dictionaries so they can be matched against our speech words.
+- We strip away newline characters and turn each dictionary into a data frame.
+
+
+```python
+# let's look positive and negative in Al Gore's speech
+
+# stripping away the '\n' newline characters
+pos_list=[]
+for w in poswords:
+    pos_list.append(w.strip())
+
+neg_list=[]
+for w in negwords:
+    neg_list.append(w.strip())
+
+# convert the dictionaries to pandas df
+pos_df = pd.DataFrame(pos_list,columns=['word'])
+pos_df['sentiment'] = 'positive'
+
+neg_df = pd.DataFrame(neg_list,columns=['word'])
+neg_df['sentiment'] = 'negative'
+```
+
+---
+
+# Inspect the Tables We Will Merge
+
+- At this point, we have one table from the speech and one dictionary table of sentiment words.
+- The next step is to merge them and keep only the words that appear in both places.
+
+
+```python
+df
+```
+
+```
+##           word  count
+## 0       family     50
+## 1        child     29
+## 2      america     29
+## 3       people     25
+## 4          new     24
+## ...        ...    ...
+## 1065  enriches      1
+## 1066     death      1
+## 1067      made      1
+## 1068   license      1
+## 1069    dinner      1
+## 
+## [1070 rows x 2 columns]
+```
+
+---
+
+# Inspect the Positive Dictionary
+
+- This is the positive-word dictionary after we turned it into a table.
+- Each row is a word labeled as positive.
+
+
+```python
+pos_df
+```
+
+```
+##            word sentiment
+## 0            a+  positive
+## 1        abound  positive
+## 2       abounds  positive
+## 3     abundance  positive
+## 4      abundant  positive
+## ...         ...       ...
+## 2001   youthful  positive
+## 2002       zeal  positive
+## 2003     zenith  positive
+## 2004       zest  positive
+## 2005      zippy  positive
+## 
+## [2006 rows x 2 columns]
+```
+
+---
+
+# Inspect the Negative Dictionary
+
+- We do the same thing for the negative-word dictionary.
+- This gives us a second table to match against the speech.
+
+
+```python
+neg_df
+```
+
+```
+##             word sentiment
+## 0        2-faced  negative
+## 1        2-faces  negative
+## 2       abnormal  negative
+## 3        abolish  negative
+## 4     abominable  negative
+## ...          ...       ...
+## 4778        zaps  negative
+## 4779      zealot  negative
+## 4780     zealous  negative
+## 4781   zealously  negative
+## 4782      zombie  negative
+## 
+## [4783 rows x 2 columns]
+```
+
+---
+
+# Merge Words with Positive and Negative Lexicons
+
+- A merge keeps only the overlapping words.
+- So here, we isolate the positive and negative words that actually appear in the speech.
+
+
+```python
+out_pos = pd.merge(df, pos_df, on=['word'])
+out_neg = pd.merge(df, neg_df, on=['word'])
+
+top_pos = out_pos.head(10)
+top_neg = out_neg.head(10)
+```
+
+---
+
+# Top Positive Words
+
+
+```python
+fig, ax = plt.subplots(figsize=(7,3))
+ax.barh(top_pos['word'], top_pos['count'], color='seagreen')
+ax.set_title('Top positive words')
+ax.set_xlabel('count')
+ax.set_ylabel('word')
+ax.invert_yaxis() # flip axes, why not
+plt.tight_layout()
+plt.show()
+```
+
+&lt;div style="margin-bottom:-30px;"&gt;&lt;/div&gt;
+
+&lt;img src="Lecture27_intrototextanalysis_files/figure-html/unnamed-chunk-19-5.png" width="672" /&gt;
+
+---
+
+# Top Negative Words
+
+
+```python
+fig, ax = plt.subplots(figsize=(7,3))
+ax.barh(top_neg['word'], top_neg['count'], color='salmon')
+ax.set_title('Top negative words')
+ax.set_xlabel('count')
+ax.set_ylabel('word')
+ax.invert_yaxis()
+plt.tight_layout()
+plt.show()
+```
+
+&lt;div style="margin-bottom:-30px;"&gt;&lt;/div&gt;
+
+&lt;img src="Lecture27_intrototextanalysis_files/figure-html/unnamed-chunk-21-7.png" width="672" /&gt;
+
+---
+
+# Relative Frequency of Sentiment
+
+- Raw counts are useful, but proportions are even more helpful.
+- Here we divide by the total number of cleaned words to compare positive and negative language on the same scale.
+
+
+```python
+# freq of positive words: num of positive words / number of total words
+pos_freq = out_pos['count'].sum() / df['count'].sum()
+neg_freq = out_neg['count'].sum() / df['count'].sum()
+
+print(pos_freq)
+```
+
+```
+## 0.08754338603933667
+```
+
+```python
+print(neg_freq)
+
+# on average, Al Gore used two times more positive words in 
+# relative to neg words on this speech
+```
+
+```
+## 0.043964519861164675
+```
+
+---
+
+# Word Cloud ☁️
+
+- A word cloud is a nice and quick visual summary.
+- Frequent words appear larger in the cloud.
+
+
+```python
+#! pip install wordcloud
+from wordcloud import WordCloud # to create the word cloud
+wc = WordCloud(width=800, height=400, \
+      background_color='white').generate_from_frequencies(freq)
+fig, ax = plt.subplots(figsize=(7,3))
+ax.imshow(wc)
+ax.axis('off')
+plt.show()
+```
+
+&lt;div style="margin-bottom:-30px;"&gt;&lt;/div&gt;
+
+&lt;img src="Lecture27_intrototextanalysis_files/figure-html/unnamed-chunk-24-9.png" width="672" /&gt;
+
+---
+
+# Recap
+
+- We read a speech into Python and tokenized it into analyzable pieces.
+- We removed stopwords and punctuation, then lemmatized terms to combine close word variants.
+- We matched the cleaned vocabulary against positive and negative dictionaries.
+- The speech uses noticeably more positive than negative language.
+- The final word cloud gives a quick visual summary of the most prominent themes.
+- You can imagine running a similar analysis on other speeches, news articles, books, reddit posts...
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(https://pbs.twimg.com/profile_images/1121082444596350976/IH7Sq90N_400x400.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 110px;
+  height: 128px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

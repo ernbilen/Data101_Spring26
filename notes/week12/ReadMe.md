@@ -1,1 +1,1 @@
-To view the notes: https://ernbilen.github.io/Data101_Fall25/notes/week11/slides.html
+To view the notes: https://ernbilen.github.io/Data101_Spring26/notes/week12/slides.html

@@ -1,1 +1,1 @@
-To access the slides, use the link: https://ernbilen.github.io/Data101_Spring26/notes/week4/slides.html
+To access the slides, use the link: https://ernbilen.github.io/Data101_Spring26/notes/week04/slides.html
